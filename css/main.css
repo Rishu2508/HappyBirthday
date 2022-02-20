@@ -1,0 +1,583 @@
+	*{	
+		padding: 0;
+		margin: 0;
+		box-sizing: border-box;
+	}		
+	html{
+		scroll-behavior: smooth;
+	}
+	body{
+		background: url("..\\images\\hearts.png") pink no-repeat;
+		background-size: cover;
+		background-attachment: scroll;
+	}
+	section{
+		/*border: 1px solid red;*/
+		height: 100vh;
+	}
+	.d-none{
+		display: none !important;
+	}
+	.loader-overlay{
+		position: fixed;
+		z-index: 999;
+		top: -100%;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		/*opacity: 0;*/
+		background: #333;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition: 600ms cubic-bezier(0.4, 0, 1, 1);
+		overflow: hidden;
+	}
+	.loader-overlay.show{
+		/*opacity: 1;*/
+		top: 0;
+	}
+	.loader-overlay .loader-heart{
+		position: absolute;
+		bottom: -100%;
+		display: inline-block;
+		color: white;
+		margin: 0 0.2rem;
+		font-size: 5rem;
+		opacity: 0;
+		filter: drop-shadow(0px 0px 16px #0009);
+		transition: opacity 0.5s ease;
+	}
+	.loader-overlay .loader-heart.active{
+		animation: FadeInHeart 1.5s ease 1 normal forwards, float 40s ease 1 normal forwards;
+		animation-delay: calc(100ms * var(--pt)), calc(110ms * var(--pt));
+	}
+	.start-btn{
+		user-select: none;
+		position: relative;
+		background: #fff8;
+		padding: 0 0.95rem;
+		color: #333;
+		border: 2px solid #111;
+		font-size: 5rem;
+		border-radius: 50%;
+		box-shadow: 5px 5px 2px 1px #111;
+		transform: translate(-5px,-5px);
+		transition: all 200ms ease;
+	}
+	.start-btn:active, .start-btn:focus{
+		box-shadow: 0px 0px 2px 1px #111;
+		transform: none;
+	}
+	.ball {
+		top: 50px;
+		color: black;
+		-webkit-text-stroke: 0.5px;
+		/*left: 50%;*/
+		transform: translateX(-1800%) translateY(-400%) scale(8);
+		font-size: 1.4rem;
+		width: max-content;
+		padding: 0.5rem;
+		background: #fff;
+		border-radius: 8px;
+		box-shadow: inset -1px -1px 2px 1px #0007,1px 1px 1px 0px #0004;
+	}
+	.ball.animate{
+		animation: rotate 5s 1 ease normal none;
+	}
+
+	.happy-bday{
+		max-width: 70vw;
+		display: none;
+		animation: FadeIn 2s 1 ease forwards;
+		filter: drop-shadow(2px 2px 5px #0007);
+		transition: 2s ease-in-out;
+	}
+	.happy-bday.active{
+		display: block;
+	}
+	.happy-bday img{
+		width: 100%;
+	}
+	.love{
+		position: relative;
+	    text-align: center;
+	    padding: 1rem;
+	}
+	.love:after, .love:before{
+		content: '';
+		position: absolute;
+		width: 60%;
+		height: 2px;
+		background: currentColor;
+	}
+	.love::before{
+		bottom: 80%;
+		left: -100%;
+	}
+	.love::after{
+		top: 85%;
+		right: -100%;
+	}
+	.carousel-container{
+		width: 90vw;
+		height: 90vh;
+		position: relative;
+		margin: 10px auto;
+		background: #ff03810d;
+		overflow: hidden;
+		/*background: #fff;*/
+		/*backdrop-filter: blur(10px) saturate(100%);*/
+		border: 1px hotpink solid;
+		border-radius: 10px;
+		box-shadow: 0 0 30px -2px hotpink;
+		/*transform: scale(0);*/
+		/*animation: scaleUp 2s ease 1 normal forwards;*/
+	}
+	.carousel-container::after {
+	    content: '';
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    z-index: -1;
+	    border-radius: inherit;
+	    width: 100%;
+	    height: 100%;
+	    background: #f3efef00;
+	    backdrop-filter: blur(8px);
+	}
+	.photos-container::-webkit-scrollbar {
+	  width: 1px;
+	  height: 1px;
+	}
+
+	/* Track */
+	.photos-container::-webkit-scrollbar-track {
+		background: transparent;
+	}
+	 
+	/* Handle */
+	.photos-container::-webkit-scrollbar-thumb {
+	  background: transparent; 
+	}
+
+	/* Handle on hover */
+/*	.carousel-container::-webkit-scrollbar-thumb:hover {
+	  background: transparent; 
+	}*/
+	.photos-container{
+		width: 100%;
+		height: 80%;
+		overflow: scroll;
+	}
+	.carousel{
+		height: 100%;
+		width: max-content;
+		/*animation: carousel 40s 3s linear infinite alternate;*/
+		animation-fill-mode: none;
+		padding: 2rem 0.5rem;
+	}
+	.carousel:hover{
+		animation-play-state: paused;
+	}
+	.carousel .photo{
+		height: 100%;
+		position: relative;
+		margin: 0 10px;
+		display: inline-block;
+		transition: all 280ms;
+		transition-delay: 300ms;
+		background: white;
+		border-radius: 1rem;
+		/*border: 2px solid black;*/
+		overflow: hidden;
+	}
+	.photo img {
+		width: 100%;
+		border-radius: inherit;
+		box-shadow: 5px 5px 8px 2px #0005;
+		transition: transform 0.7s ease,box-shadow 250ms ease;
+	}
+	.photo:hover img, .photo:focus img{
+		transform: scale(1.2);
+	}
+	.photo .overlay{
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: end;
+		background: rgba(0, 0, 0, 0.1);
+		/*box-shadow: inset 0px -86px 116px -8px rgb(0 0 0 / 90%);*/
+		opacity: 0;
+		transition: transform 0.7s ease,box-shadow 0.7s ease;
+	}
+	.photo:hover .overlay, .photo:focus .overlay{
+		box-shadow: inset 0px -86px 116px -8px rgb(0 0 0 / 90%);
+		opacity: 1;
+	}
+	.overlay div{
+		transform: translateY(100%);
+		flex-grow: 1;
+		transition: 0.3s ease;
+		/*transition-delay: 0.4s;*/
+	}
+	.photo:hover .overlay div{
+		transform: none;
+	}
+	.overlay .text{
+		font-size: 1rem;
+		padding: 1rem;
+		color: #fff;
+	}
+	.overlay .text .date{
+		font-size: 0.8rem;
+	}
+	.overlay .text .icon{
+		max-width: 30%;
+	}
+	.center{
+		text-align: center;
+	}
+	.wish, .para, .text   {
+		font-family: 'Roboto Slab', serif;
+	}
+	.wish{
+		max-height: 100px;
+		min-height: 60px;
+	}
+	.para{
+		padding: 1rem;
+		font-size: 1rem;
+		line-height: 1.4rem;
+		word-break: break-word;
+	}
+
+	.photo-stack{
+		overflow: hidden;
+	}
+	.stack-container {
+	    width: 70vw;
+	    height: 90vw;
+	    position: relative;
+	    margin: 3rem auto;
+	    transform-style: preserve-3d;
+	}
+	.stack-photo {
+		transform-style: preserve-3d;
+	    position: absolute;
+	    width: 95%;
+	    height: 95%;
+	    background: #141414;
+	    color: rgb(244,00,00);
+    	padding: 97% 36% 0;
+    	font-size: 2.5rem;
+	    border: 6px solid white;
+	    border-bottom-width: 55px;
+	    left: 50%;
+	    top: 50%;
+	    transition: 0.8s;
+	    box-shadow: 0 0 12px 2px #0005;
+	    transform: translate(-50%, -50%) rotate(calc(5deg * var(--p)));
+	}
+
+	.stack-photo:nth-child(1) {
+		background: url('..\\images\\Her 14.jpg') no-repeat;
+		background-size: 180%;
+		background-position: 50% 45%;
+		/*transform: translate(-60%, -52%) rotate(calc(-2deg * var(--p)));	*/
+	}
+	.stack-photo:nth-child(2) {
+		background: url('..\\images\\Her 13.jpg') no-repeat;
+		background-size: cover;
+		background-position: 0% 0%;	
+	}
+	.stack-photo:nth-child(3) {
+		background: url('..\\images\\Her 12.jpg') no-repeat;
+		background-size: cover;
+		background-position: 0% 18%;
+	}
+	.stack-photo:nth-child(4) {
+		background: url('..\\images\\Her 11.jpg') no-repeat;
+		background-size: cover;
+		background-position: 0% 7%;
+		/*visibility: hidden;*/
+		/*transform: translate(-56%, -53%) rotate(calc(5deg * var(--p)));	*/
+	}
+	.stack-photo:nth-child(5) {
+		background: url('..\\images\\Her 10.jpg') no-repeat;
+		background-size: cover;
+		background-position: 0% 15%;
+	}
+	.stack-photo:nth-child(6) {
+		background: url('..\\images\\Her 9.jpg') no-repeat;
+		background-size: cover;
+		background-position: 0% 0%;
+		/*visibility: hidden;*/
+		transform: translate(-50%, -50%) rotate(calc(5deg * var(--p)));	
+	}	.stack-photo:nth-child(7) {
+		background: url('..\\images\\Her 8.jpg') no-repeat;
+		background-size: cover;
+		background-position: 0% 0%;
+		transform: translate(-60%, -52%) rotate(calc(-2deg * var(--p)));	
+	}
+	.stack-photo:nth-child(8) {
+		background: url('..\\images\\Her 7.jpeg') no-repeat;
+		background-size: cover;
+		background-position: 0% 65%;
+	}
+	.stack-photo:nth-child(9) {
+		background: url('..\\images\\Her 6.jpeg') no-repeat;
+		background-size: cover;
+		background-position: 0% 65%;
+		/*visibility: hidden;*/
+		transform: translate(-55%, -52%) rotate(calc(5deg * var(--p)));	
+	}
+	.stack-photo:nth-child(10) {
+		background: url('..\\images\\Her 5.jpg') no-repeat;
+		background-size: 175%;
+    	background-position: 50% 2%;
+		/*visibility: hidden;*/
+		transform: translate(-50%, -50%) rotate(calc(5deg * var(--p)));	
+	}
+	.stack-photo:nth-child(11) {
+		background: url('..\\images\\Her 4.jpg') no-repeat;
+		background-size: cover;
+		background-position: 0% 15%;
+		/*visibility: hidden;*/
+		/*transform: translate(-55%, -52%) rotate(calc(5deg * var(--p)));	*/
+	}
+	.stack-photo:nth-child(12) {
+		background: url('..\\images\\Her 3.jpg') no-repeat;
+		background-size: cover;
+		background-position: 0% 10%;
+		/*visibility: hidden;*/
+		transform: translate(-50%, -50%) rotate(calc(5deg * var(--p)));	
+	}
+	.stack-photo:nth-child(13) {
+		background: url('..\\images\\Her 2.jpg') no-repeat;
+		background-size: cover;
+		background-position: 0% 15%;
+		/*visibility: hidden;*/
+		transform: translate(-55%, -52%) rotate(calc(5deg * var(--p)));	
+	}
+	.stack-photo:nth-child(14) {
+		/*background: linear-gradient(#0000aa05,#0000aa49), url('..\\images\\Her 1.jpg') no-repeat;*/
+		background: url('..\\images\\Her 1.jpg') no-repeat;
+		background-size: 175%;
+		background-position: 50% 25%;
+		transform-origin: right;
+		/*visibility: hidden;*/
+		transform: translate(-50%, -50%) rotate(calc(5deg * var(--p)));	
+	}
+
+	.stack-photo:nth-child(even).remove{
+		transform: translate(120%, -60%) rotate(45deg);		
+	}
+	.stack-photo:nth-child(odd).remove{
+		transform: translate(-300%, -80%) rotate(-45deg);		
+	}
+
+
+	@keyframes carousel {
+		from{}
+		to{transform: translateX(-100%);}
+	}
+	@keyframes scaleUp {
+		from{transform: scale(0);}
+		to{transform: scale(1.0);}
+	}
+	@keyframes start{
+		0%{transform: scale(1.0);}
+		20%{transform: scale(1.4);}
+		40%{transform: scale(1.0);}
+		60%{transform: scale(1.4);}
+		100%{transform: scale(0);}
+
+	}
+	@keyframes FadeIn {
+		from{opacity: 0}
+		to{opacity: 1 }
+	}
+	@keyframes FadeInHeart {
+		from{opacity: 0}
+		to{opacity: 0.8}
+	}
+	@keyframes scale-heart {
+		from{transform: scale(1.0);}
+		to{transform: scale(1.3);}
+	}
+	@keyframes float {
+		from{}
+		to{top: -500%;}
+	}
+	@keyframes rotate {
+		0%{
+			transform: translateX(-1800%) translateY(-400%) scale(8) rotate(0);
+		}
+		/*50%{
+			transform: translateX(300%) translateY(-400%) scale(8) rotate(0);
+		}*/
+		/*55%{
+			transform: translateX(300%) translateY(-400%) scale(8) rotate(0);
+		}*/
+		100%{
+			transform: translateX(1900%) translateY(-400%) scale(8) rotate(360deg);
+		}
+	}
+
+@media (max-width: 500px) {
+	body{
+		background: url("..\\images\\hearts.png") pink repeat-y;
+		background-size: cover;
+		background-attachment: fixed;
+	}
+	.container{
+		padding: 1rem;
+	}
+	.wish{
+		visibility: hidden;
+		font-size: large;
+	}
+	.wish.start{
+		visibility: visible;
+		font-size: large;
+	}
+	.bubble{
+		background: #ffffff4f;
+	    border: 1px solid #fff6;
+	    border-radius: 12px;
+	    backdrop-filter: blur(5px);
+	    box-shadow: 4px 4px 12px -3px #0004;
+	}
+	.carousel-container{
+		height: 80vh;
+		background: #fff5;
+		/*overflow: scroll;*/
+	}
+	.love.animate::after{
+		animation: floatRight 1.5s 0.5s ease 1 normal forwards;
+	}
+	.love.animate::before{
+		animation: floatLeft 1.5s 0.5s ease 1 normal forwards;
+	}
+	.photos-container{
+		height: 53%;
+	}
+	.carousel{
+		height: 100%;
+		animation-duration: 20s;
+		animation-delay: 0s;
+		padding: 1rem 0.5rem;
+	}
+	.carousel-container .carousel .photo{
+		margin: 0 8px;
+		width: 133.4px;
+	}
+	.overlay .text{
+		font-size: 14px;
+	}
+	.overlay .text .date{
+		font-size: xx-small;
+	}
+	.overlay .icon{
+		display: none;
+	}
+	.wish .wish_ltr{
+		opacity: 0;
+		font-size: 24px;
+		font-weight: bold;
+		color: #ff0000;
+    	text-shadow: 2px 2px 1px rgb(251 101 101 / 56%);
+	    transition: 0.5s;
+	}
+	.wish.start .wish_ltr{
+		opacity: 0;
+		animation: FadeIn 1s ease 1 normal forwards;
+		animation-delay: calc(100ms * var(--ltr));
+	}
+	
+
+	.gift-wrap {
+		--w: 78vw;
+	    width: var(--w);
+	    height: calc(var(--w) * 1.625);
+	    position: relative;
+	    margin: 1rem auto;
+	    background: white;
+	    border-radius: 10px;
+	    box-shadow: -5px -5px 12px 1px #0005 inset, 5px 5px 16px 1px #0003;
+	    transition: all 1.4s ease;
+		animation: scale 0.5s linear infinite alternate forwards;
+	    transform-origin: top left;
+	}
+	.gift-wrap.open{
+		animation: open_box 2s linear 1 normal forwards;
+	}
+	.gift-wrap:before {
+	    content: '';
+	    position: absolute;
+	    top: -5px;
+	    left: -4px;
+	    width: 102%;
+	    height: 102%;
+	    background: url('..\\images\\gift wrap.png') no-repeat;
+	    background-size: 230%;
+    	background-position: 72% 23%;
+	    filter: drop-shadow(3px 6px 3px #0006);
+	    transform-origin: top left;
+	}
+	.gift-wrap:after {
+	    content: 'From: Rishu❤';
+	    position: absolute;
+	    bottom: 16px;
+	    /* border: 1px solid black; */
+	    width: max-content;
+	    padding: 1rem;
+	    font-size: larger;
+	}
+	@keyframes scale {
+		80%{
+			transform-origin: center center;
+			transform: scale(1);
+		}
+		85%{
+			transform-origin: center center;
+			transform: scale(1) rotate(2deg);
+		}
+		90%{
+			transform-origin: center center;
+			transform: scale(1) rotate(-2deg);
+		}
+		100%{
+			transform-origin: center center;
+			transform: scale(0.97);
+		}
+	}
+	@keyframes open_box {
+		10%{
+			transform-origin: top left;
+    		transform: translate(-24px,-10px) rotate(-8deg);
+    	}
+    	60%{
+    		transform-origin: top left;
+    		transform: translate(-24px,300px) rotate(-4deg);	
+    	}
+    	100%{
+    		transform-origin: top left;
+    		transform: translate(-24px,800px) rotate(5deg);
+    		visibility: hidden;
+    		display: none;
+    	}
+	}
+	@keyframes floatLeft {
+		from{left: -100%;}
+		to{left: -16px;}
+	}
+	@keyframes floatRight {
+		from{right: -100%;}
+		to{right: -16px;}
+	}
+}
