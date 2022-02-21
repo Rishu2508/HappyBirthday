@@ -12,6 +12,9 @@
 		background-attachment: scroll;
 	}
 	section{
+		position: relative;
+	}
+	section.fullheight{
 		/*border: 1px solid red;*/
 		height: 100vh;
 	}
@@ -193,7 +196,7 @@
 		overflow: hidden;
 	}
 	.photo img {
-		width: 100%;
+		height: 100%;
 		border-radius: inherit;
 		box-shadow: 5px 5px 8px 2px #0005;
 		transition: transform 0.7s ease,box-shadow 250ms ease;
@@ -285,7 +288,7 @@
 
 	.stack-photo:nth-child(1) {
 		background: url('..\\images\\Her 14.jpg') no-repeat;
-		background-size: 180%;
+		background-size: cover;
 		background-position: 50% 45%;
 		/*transform: translate(-60%, -52%) rotate(calc(-2deg * var(--p)));	*/
 	}
@@ -317,11 +320,11 @@
 		background-position: 0% 0%;
 		/*visibility: hidden;*/
 		transform: translate(-50%, -50%) rotate(calc(5deg * var(--p)));	
-	}	.stack-photo:nth-child(7) {
+	}.stack-photo:nth-child(7) {
 		background: url('..\\images\\Her 8.jpg') no-repeat;
 		background-size: cover;
 		background-position: 0% 0%;
-		transform: translate(-60%, -52%) rotate(calc(-2deg * var(--p)));	
+		transform: translate(-55%, -52%) rotate(calc(-5deg * var(--p)));	
 	}
 	.stack-photo:nth-child(8) {
 		background: url('..\\images\\Her 7.jpeg') no-repeat;
@@ -498,10 +501,11 @@
 		animation: FadeIn 1s ease 1 normal forwards;
 		animation-delay: calc(100ms * var(--ltr));
 	}
-	
-
+	.gift{
+		overflow: hidden;
+	}
 	.gift-wrap {
-		--w: 78vw;
+		--w: 80vw;
 	    width: var(--w);
 	    height: calc(var(--w) * 1.625);
 	    position: relative;
@@ -537,6 +541,22 @@
 	    width: max-content;
 	    padding: 1rem;
 	    font-size: larger;
+	}
+	.gift-inside{
+		position: absolute;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	    background: url('..\\images\\kit kat.png') no-repeat;
+	    background-size: cover;
+	    background-position: 46% 0;
+	    z-index: -20;
+	    transform: rotate(8deg);
+	}
+	.gift-inside:nth-child(2) {
+	    transform: rotate(14deg);
+	    filter: brightness(0.8);
 	}
 	@keyframes scale {
 		80%{
