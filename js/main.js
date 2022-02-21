@@ -26,6 +26,9 @@ $(document).ready(function(){
 		$('.gift-wrap').click(function(){
 			if(d.getDate() > 21){
 				$(this).addClass('open');
+				setTimeout(function(){
+					alert("Check your bag!♥");
+				},5000)
 			}else{
 				alert("You are not allowed to open this gift now.");
 			}
